@@ -71,14 +71,15 @@ intnumber {digit}+
 
 "{"       { while (input() != '}'); }
  
-"(*"      { jum:
-            while (input() != '*');
-            int c = input();
-            if (c != ')'){
-              unput(c);
-              goto jum;
-            }
-          }
+"(*"      { int done = 0;
+            while (!done){
+               while (input() != '*');
+               int c = input();
+               if (c != ')')
+               unput(c);
+               else done = 1; 
+            };
+         }
    
 if        {return(maketoken(RESERVED, IF));}
 then      {return(maketoken(RESERVED, THEN));}
